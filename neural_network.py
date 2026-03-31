@@ -79,3 +79,17 @@ modele.fit(train_gen, epochs=5)
 score = modele.evaluate(train_gen, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
+
+
+
+y_pred = modele.predict(test_gen)
+y_true = test_data["eta_parameter"].values
+
+plt.figure(figsize=(10, 6))
+plt.scatter(y_true, y_pred, alpha=0.5)
+plt.plot([y_true.min(), y_true.max()], [y_true.min(), y_true.max()], 'r--')
+plt.xlabel("Valeurs réelles de eta")
+plt.ylabel("Valeurs prédites de eta")
+plt.title("Validation des prédictions")
+plt.savefig("validation_predictions.png")
+plt.show()
